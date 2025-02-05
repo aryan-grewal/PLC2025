@@ -86,7 +86,9 @@ public class Overflow
         for ( int j = 1; j <= m; j++ )
         {
             ns = ns * n;
-//             assert ?? : "Floating-point overflow";
+            /* Infinity (overflow condition), it can be asserted by mutiplying by a small constant, 
+                because infinity into a samll constant (e.g. 2) is still infinity */
+            assert ns != ns*2 : "Floating-point overflow";
             resultList.add(ns);
         }
         return resultList;
@@ -112,7 +114,9 @@ public class Overflow
         for ( int j = 0; j <= m; j++ )
         {
             ns_inv = ns_inv / n; // update from 1/n^(i-1) to 1/n^i
-//             assert ?? : "Floating point underflow";
+            /* Underflow causes the number power to be 0 (underflow condition),
+                instead of a very small positive integer */
+            assert ns_inv != 0 : "Floating point underflow";
             geom_sum = ns_inv + geom_sum;
             resultList.add(geom_sum);
         }
